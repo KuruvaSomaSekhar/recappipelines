@@ -10,7 +10,7 @@ pipeline {
          stage("download-artifacts"){
              steps {
                  println "cloing artifacts"
-                 sh "aws s3 cp s3://devops09art/${projectName}/${branchName}/${buildNumber}/*.war ."
+                 sh "aws s3 cp s3://devops09art/${projectName}/${branchName}/${buildNumber}/hello-${buildNumber}.war ."
              }
          }
      }
