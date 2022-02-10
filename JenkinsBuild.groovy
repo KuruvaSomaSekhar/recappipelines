@@ -21,7 +21,7 @@ pipeline {
             steps{
                 println "Uplod to s3"
                 sh "ls -lart"
-                sh "s3 cp target/hello-${BUILD_NUMBER}.war s3://devops09art/${env. JOB_NAME}/${sourceBranch}/${BUILD_NUMBER}/ "
+                sh "aws s3 cp target/hello-${BUILD_NUMBER}.war s3://devops09art/${env. JOB_NAME}/${sourceBranch}/${BUILD_NUMBER}/ "
             }
         }
 
