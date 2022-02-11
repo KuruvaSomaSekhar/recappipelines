@@ -1,6 +1,7 @@
 //declarative pipeline
 pipeline {
-    agent any
+   // agent any
+    agent { label 'java' }
     parameters { string(name: 'sourceBranch', defaultValue: 'staging', description: '') 
                 }
     stages {

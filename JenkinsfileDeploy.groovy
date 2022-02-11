@@ -13,5 +13,10 @@ pipeline {
                  sh "aws s3 cp s3://devops09art/${projectName}/${branchName}/${buildNumber}/hello-${buildNumber}.war ."
              }
          }
+         stage("deployToTomcat"){
+             steps{
+                 print "scp -i .pem hello-{buildNumber}.war ec2-user@ip:/var/lib/tomcat/webapps"
+             }
+         }
      }
 }
