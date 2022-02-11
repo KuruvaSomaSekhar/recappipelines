@@ -4,6 +4,7 @@ pipeline {
     parameters { string(name: 'projectName', defaultValue: 'recapbuild', description: '')
                  string(name: 'buildNumber', defaultValue: '', description: '')
                  string(name: 'branchName', defaultValue: 'master', description: '')
+                 string(name: 'serverips', defaultValue: '', description: 'Provide server IPs')
     
      }
      stages{
@@ -16,6 +17,17 @@ pipeline {
          stage("deployToTomcat"){
              steps{
                  print "scp -i .pem hello-{buildNumber}.war ec2-user@ip:/var/lib/tomcat/webapps"
+                 sh """
+
+                    IPs=$(echo ${serverips} | tr "," "\n")
+                    for ip in $IPs
+                    do
+                    echo "My IP is: $ip"
+                    scp -i .pem hello-{buildNumber}.war ec2-user@$ip:/var/lib/tomcat/webapps
+                    done
+
+
+                 """
              }
          }
      }
